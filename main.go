@@ -5,7 +5,6 @@ import (
 	"crypto/tls"
 	"fmt"
 	"io"
-	"math"
 	"net"
 	"net/http"
 	"net/url"
@@ -121,8 +120,6 @@ func stressHTTP(rawurl, method string, durationSec, concurrency, rps int, conn n
 	}
 	wg.Wait()
 
-	total := atomic.LoadUint64(&success) + atomic.LoadUint64(&fail)
-	sendReport(conn, fmt.Sprintf("HTTP RPS achieved: %d", total/int(durationSec)))
 }
 
 func handleServer(conn net.Conn) {
